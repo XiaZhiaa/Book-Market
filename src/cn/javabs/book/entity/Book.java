@@ -54,7 +54,7 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", path='" + path + '\'' +
                 ", photoName='" + photoName + '\'' +
-                ", category=" + category +
+                ", categoryName=" + category +
                 '}';
     }
 

@@ -26,13 +26,13 @@
             <td>操作1</td>
             <td>操作2</td>
         </tr>
-        <c:forEach items="${CategoryList}" var="CategoryList">
+        <c:forEach items="${data}" var="CategoryList">
             <tr align="center">
                 <td>${CategoryList.id}</td>
                 <td>${CategoryList.name}</td>
                 <td>${CategoryList.description}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/categoryServlet?op=editCategoryUI&id=${CategoryList.id}">修改</a>
+                    <a href="JavaScript:editCategory('${CategoryList.id}')">修改</a>
                 </td>
                 <td>
                     <a href="JavaScript:deleteCategory('${CategoryList.id}')">删除</a>
@@ -57,9 +57,14 @@
     function deleteCategory(id) {
         var sure = window.confirm("您确定要删除吗？");
         if (sure){
-            window.location.href ="${pageContext.request.contextPath}/categoryServlet?op=deleteCategory&id="+id;
-        }else{
-            alert("尚未删除");
+            window.location.href ="${pageContext.request.contextPath}/categoryServlet?method=deleteCategory&id="+id;
+        }
+        //不用写else
+    }
+    function editCategory(id) {
+        var sure = window.confirm("您确定要修改吗？");
+        if (sure){
+            window.location.href = "${pageContext.request.contextPath}/categoryServlet?method=updateCategoryUI&id="+id
         }
     }
 </script>

@@ -1,21 +1,28 @@
-package cn.javabs.book.servlet;
+package cn.javabs.book.web.servlet;
 
 import cn.javabs.book.entity.Book;
+import cn.javabs.book.entity.Category;
 import cn.javabs.book.service.BookService;
 import cn.javabs.book.service.impl.BookServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @WebServlet("/bookServlet")
+@MultipartConfig(maxFileSize = 1024 * 50)
 public class BookServlet extends HttpServlet {
 
     BookService bookService = new BookServiceImpl();
@@ -87,7 +94,42 @@ public class BookServlet extends HttpServlet {
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);
 //        }
-        jieshou(request,response);
+
+        String bookName = request.getParameter("bookName");
+        String bookDescription = request.getParameter("bookDescription");
+        String sbookPrice = request.getParameter("bookPrice");
+        double bookPrice = Double.parseDouble(sbookPrice);
+        String publish = request.getParameter("publish");
+        String author = request.getParameter("author");
+
+        String sCategoryId = request.getParameter("categoryId");
+
+        int categoryId = Integer.parseInt(sCategoryId);
+
+        Category category = new Category();
+
+        category.setId(categoryId);
+
+        String realPath = this.getServletContext().getRealPath("/upload/");
+
+        File file = new File(realPath);
+
+        if (!file.exists()){
+            file.mkdir();
+        }
+
+        Part part = request.getPart("photoName");
+        String fileName = part.getSubmittedFileName();
+
+        Date date = new Date();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+
+        String currentTime = simpleDateFormat.format(date);
+
+        part.write(realPath + fileName);
+
+        Book book = new Book(bookName,bookDescription,bookPrice,publish,author,realPath,fileName,category);
 
         int rows = bookService.addBook(book);
 

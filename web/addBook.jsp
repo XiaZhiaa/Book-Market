@@ -12,7 +12,7 @@
 </head>
 <body>
 <center>
-    <form action="${pageContext.request.contextPath}/bookServlet?op=addBook" method="post">
+    <form action="${pageContext.request.contextPath}/bookServlet?method=addBook" method="post" enctype="multipart/form-data">
         <table border="1px" width="600px">
             <tr align="center">
                 <td colspan="2"><h3 style="color: red">添加图书</h3></td>
@@ -50,13 +50,19 @@
             <tr align="center">
                 <td >路径：</td>
                 <td >
-                    <input type="text" name="path">
+                    <input type="file" name="path">
                 </td>
             </tr>
             <tr align="center">
                 <td >名称：</td>
                 <td >
                     <input type="text" name="photoName">
+                </td>
+            </tr>
+            <tr align="center">
+                <td>分类：</td>
+                <td>
+                    <input type="text" name="categoryId">
                 </td>
             </tr>
             <tr align="center">

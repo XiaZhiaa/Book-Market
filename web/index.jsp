@@ -15,11 +15,11 @@
     <h2>欢迎来到图书管理系统</h2>
     <a href="addCategory.jsp">添加分类</a>
     <br>
-    <a href="${pageContext.request.contextPath}/categoryServlet?op=findAllCategories">查询全部分类</a>
+    <a href="${pageContext.request.contextPath}/categoryServlet?method=findAllCategories">查询全部分类</a>
     <hr>
     <a href="addBook.jsp">添加图书</a>
     <br>
-    <a href="${pageContext.request.contextPath}/bookServlet?op=findAllBooks">查询全部图书</a>
+    <a href="${pageContext.request.contextPath}/bookServlet?method=findAllBooks">查询全部图书</a>
   </center>
   </body>
 </html>

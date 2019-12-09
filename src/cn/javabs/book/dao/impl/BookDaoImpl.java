@@ -109,6 +109,16 @@ public class BookDaoImpl implements BookDao {
     }
 
     /**
+     * 查询图书条数的方法
+     * @return  总图书条数
+     */
+    @Override
+    public int getBooksNumber() {
+//        return qrBook.query("");
+       return 0;
+    }
+
+    /**
      * 分页查询
      * @param startIndex    开始索引
      * @param pageSize      每页个数，要查询的条数

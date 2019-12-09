@@ -13,7 +13,7 @@ public class Page {
     //每列要显示的条数
     private int pageSize = 3;
 
-    //当前页面
+    //当前页码
     private int currentPage;
 
     //总页数

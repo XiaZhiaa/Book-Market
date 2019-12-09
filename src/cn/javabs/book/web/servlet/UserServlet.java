@@ -1,4 +1,4 @@
-package cn.javabs.book.servlet;
+package cn.javabs.book.web.servlet;
 
 import cn.javabs.book.entity.User;
 import cn.javabs.book.service.UserService;
@@ -30,7 +30,7 @@ public class UserServlet extends HttpServlet {
 
         switch (op){
             case "userReg":
-                userReg(request,response);
+//                userReg(request,response);
                 break;
             case "userLogin":
                 userLogin(request,response);

@@ -22,6 +22,12 @@ public interface BookDao {
     Book getBookById(Integer id);
 
     /**
+     * 获取一共有多少条
+     * @return  图书 总条数
+     */
+    int getBooksNumber();
+
+    /**
      * 查询全部图书记录
      * @param startIndex    开始索引
      * @param pageSize      每页个数
