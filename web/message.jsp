@@ -14,9 +14,9 @@
 <center>
     <h2 style="color: red">${message}</h2>
     <hr>
-    <a href="${pageContext.request.contextPath}/categoryServlet?op=findAllCategories"><h2 style="color: red">查看全部分类</h2></a>
+    <a href="${pageContext.request.contextPath}/categoryServlet?method=findAllCategories"><h2 style="color: red">查看全部分类</h2></a>
     <hr>
-    <a href="${pageContext.request.contextPath}/bookServlet?op=findAllBooks"><h2 style="color: red">查看全部图书</h2></a>
+    <a href="${pageContext.request.contextPath}/bookServlet?method=findAllBooks&pageNum=1"><h2 style="color: red">查看全部图书</h2></a>
 </center>
 </body>
 </html>

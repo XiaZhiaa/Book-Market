@@ -12,7 +12,7 @@
 </head>
 <body>
 <center>
-    <form action="${pageContext.request.contextPath}/categoryServlet?op=updateCategory&id=${category.id}" method="post">
+    <form action="${pageContext.request.contextPath}/categoryServlet?method=updateCategory&id=${data.id}" method="post">
         <table border="1px" width="600px">
             <tr align="center">
                 <td colspan="2"><h3 style="color: red">修改分类</h3></td>
@@ -20,13 +20,13 @@
             <tr align="center">
                 <td >分类名称：</td>
                 <td>
-                    <input type="text" name="name" value="${category.name}">
+                    <input type="text" name="name" value="${data.name}">
                 </td>
             </tr>
             <tr align="center">
                 <td >分类描述：</td>
                 <td >
-                    <input type="text" name="description" value="${category.description}" >
+                    <input type="text" name="description" value="${data.description}" >
                 </td>
             </tr>
             <tr align="center">

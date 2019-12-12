@@ -4,6 +4,7 @@ import cn.javabs.book.entity.Book;
 import cn.javabs.book.entity.Category;
 import cn.javabs.book.service.BookService;
 import cn.javabs.book.service.impl.BookServiceImpl;
+import cn.javabs.book.util.Page;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -36,16 +37,16 @@ public class BookServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
 
-        String op = request.getParameter("op");
+        String method = request.getParameter("method");
 
-        switch (op){
+        switch (method){
             case "addBook":
                 addBook(request,response);
                 break;
             case "deleteBook":
                 deleteBook(request,response);
                 break;
-            case "updateBookUI":
+            case "findBookById":
                 updateBookUI(request,response);
                 break;
             case "updateBook":
@@ -110,6 +111,7 @@ public class BookServlet extends HttpServlet {
 
         category.setId(categoryId);
 
+        //获取文件目录
         String realPath = this.getServletContext().getRealPath("/upload/");
 
         File file = new File(realPath);
@@ -126,6 +128,8 @@ public class BookServlet extends HttpServlet {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
 
         String currentTime = simpleDateFormat.format(date);
+
+        fileName = currentTime + "_" + fileName;
 
         part.write(realPath + fileName);
 
@@ -221,9 +225,11 @@ public class BookServlet extends HttpServlet {
      * @param response
      */
     private void findAllBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Book> bookList = bookService.findAllBooks();
-        if (bookList.size()>0 && bookList != null){
-            request.setAttribute("list",bookList);
+        String sPageNum = request.getParameter("pageNum");
+        int pageNum = Integer.parseInt(sPageNum);
+        Page bookList = bookService.findAllBooks(pageNum);
+        if (bookList != null){
+            request.setAttribute("page",bookList);
             request.getRequestDispatcher("/bookList.jsp").forward(request,response);
         }else {
             request.setAttribute("message","查询全部图书失败");

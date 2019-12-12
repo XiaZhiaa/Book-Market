@@ -24,15 +24,15 @@ public class BookDaoImpl implements BookDao {
     @Override
     public int addBook(Book book) {
         try {
-            return qrBook.update("insert into book (bookName,bookDescription,bookPrice,publish,author,path,photoName,categoryId) values (?,?,?,?,?,?,?,?)",
+            return qrBook.update("insert into book (bookName,bookDescription,bookPrice,publish,author,path,photoName) values (?,?,?,?,?,?,?)",
                     book.getBookName(),
                     book.getBookDescription(),
                     book.getBookPrice(),
                     book.getPublish(),
                     book.getAuthor(),
                     book.getPath(),
-                    book.getPhotoName(),
-                    book.getCategory().getId());
+                    book.getPhotoName());
+//                    book.getCategory().getId());
         } catch (SQLException e) {
             throw new BookDaoImplException(e);
         }
@@ -114,8 +114,14 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public int getBooksNumber() {
-//        return qrBook.query("");
-       return 0;
+        try{
+            Object obj = qrBook.query("select count(*) from book" ,new ScalarHandler<Book>(1));
+            Long num = (Long) obj;
+            int number = num.intValue();
+            return number;
+        } catch (SQLException e) {
+            throw new BookDaoImplException(e);
+        }
     }
 
     /**
@@ -127,7 +133,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getAllBookRecords(int startIndex, int pageSize) {
         try {
-            List<Book> bookList =  qrBook.query("select * from book where limit ? , ? ",new BeanListHandler<Book>(Book.class),startIndex,pageSize);
+            List<Book> bookList =  qrBook.query("select * from book limit ? , ? ",new BeanListHandler<Book>(Book.class),startIndex,pageSize);
             return bookList;
         } catch (SQLException e) {
             throw new BookDaoImplException(e);
@@ -142,7 +148,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public int getPageBooksNumber(int CategoryId) {
         try {
-            Object obj = qrBook.query("select * from book where categoryId = ?" ,new ScalarHandler<Book>(1));
+            Object obj = qrBook.query("select count(*) from book where categoryId = ?" ,new ScalarHandler<Book>(1));
             Long num = (Long) obj;
             int number = num.intValue();
             return number;

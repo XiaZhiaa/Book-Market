@@ -19,7 +19,7 @@
     <hr>
     <a href="addBook.jsp">添加图书</a>
     <br>
-    <a href="${pageContext.request.contextPath}/bookServlet?method=findAllBooks">查询全部图书</a>
+    <a href="${pageContext.request.contextPath}/bookServlet?method=findAllBooks&pageNum=1">查询全部图书</a>
   </center>
   </body>
 </html>

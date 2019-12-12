@@ -48,15 +48,15 @@
                 </td>
             </tr>
             <tr align="center">
-                <td >路径：</td>
+                <td >图片</td>
                 <td >
-                    <input type="text" name="path" value="${book.path}">
+                    <input type="text" name="path" value="##">
                 </td>
             </tr>
             <tr align="center">
-                <td >名称：</td>
+                <td >分类</td>
                 <td >
-                    <input type="text" name="photoName" value="${book.photoName}">
+                    <input type="text" name="categoryId" value="####">
                 </td>
             </tr>
             <tr align="center">

@@ -48,15 +48,9 @@
                 </td>
             </tr>
             <tr align="center">
-                <td >路径：</td>
+                <td >图片：</td>
                 <td >
-                    <input type="file" name="path">
-                </td>
-            </tr>
-            <tr align="center">
-                <td >名称：</td>
-                <td >
-                    <input type="text" name="photoName">
+                    <input type="file" name="photoName">
                 </td>
             </tr>
             <tr align="center">

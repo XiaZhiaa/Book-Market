@@ -22,19 +22,29 @@ public class CategoryServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+
         String method = request.getParameter("method");
-        if (method.equals("addCategory")){
-            addCategory(request,response);
-        }else if (method.equals("delCategory")){
-            delCategory(request,response);
-        }else if (method.equals("updateCategory")){
-            updateCategory(request,response);
-        }else if (method.equals("findCategoryById")){
-            findCategoryById(request,response);
-        }else if (method.equals("findAllCategories")){
-            findAllCategories(request,response);
-        }else {
-            System.out.println("传递参数错误。");
+
+        switch (method){
+            case "addCategory":
+                addCategory(request,response);
+                break;
+            case "deleteCategory":
+                delCategory(request,response);
+                break;
+            case "updateCategory":
+                updateCategory(request,response);
+                break;
+            case "findCategoryById":
+                findCategoryById(request,response);
+                break;
+            case "findAllCategories":
+                findAllCategories(request,response);
+                break;
+            default:
+                System.out.println("前台参数传递错误。");
         }
     }
 
@@ -47,7 +57,7 @@ public class CategoryServlet extends HttpServlet {
         List<Category> list = categoryService.findAllCategories();
         if (list.size() >= 0 && list != null){
             request.setAttribute("data",list);
-            request.getRequestDispatcher("/categoryList").forward(request,response);
+            request.getRequestDispatcher("/categoryList.jsp").forward(request,response);
         }else {
             request.setAttribute("message","查询全部分类失败");
             request.getRequestDispatcher("/message.jsp").forward(request,response);

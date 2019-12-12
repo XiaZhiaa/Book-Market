@@ -26,16 +26,16 @@
             <td>操作1</td>
             <td>操作2</td>
         </tr>
-        <c:forEach items="${data}" var="CategoryList">
+        <c:forEach items="${data}" var="c">
             <tr align="center">
-                <td>${CategoryList.id}</td>
-                <td>${CategoryList.name}</td>
-                <td>${CategoryList.description}</td>
+                <td>${c.id}</td>
+                <td>${c.name}</td>
+                <td>${c.description}</td>
                 <td>
-                    <a href="JavaScript:editCategory('${CategoryList.id}')">修改</a>
+                    <a href="${pageContext.request.contextPath}/categoryServlet?method=findCategoryById&id=${c.id}">修改</a>
                 </td>
                 <td>
-                    <a href="JavaScript:deleteCategory('${CategoryList.id}')">删除</a>
+                    <a href="JavaScript:deleteCategory('${c.id}')">删除</a>
                 </td>
             </tr>
         </c:forEach>
@@ -54,6 +54,10 @@
 </body>
 </html>
 <script>
+    /**
+     * 删除分类的方法
+     * @param id
+     */
     function deleteCategory(id) {
         var sure = window.confirm("您确定要删除吗？");
         if (sure){
@@ -61,10 +65,15 @@
         }
         //不用写else
     }
-    function editCategory(id) {
+
+    /**
+     * 修改分类的方法
+     * @param id
+     */
+    function editCategor(id) {
         var sure = window.confirm("您确定要修改吗？");
         if (sure){
-            window.location.href = "${pageContext.request.contextPath}/categoryServlet?method=updateCategoryUI&id="+id
+            window.location.href = "${pageContext.request.contextPath}/categoryServlet?method=findCategoryById&id="+id
         }
     }
 </script>

@@ -12,7 +12,7 @@
 </head>
 <body>
 <center>
-    <form action="${pageContext.request.contextPath}/categoryServlet?op=addCategory" method="post">
+    <form action="${pageContext.request.contextPath}/categoryServlet?method=addCategory" method="post">
         <table border="1px" width="600px">
             <tr align="center">
                 <td colspan="2"><h3 style="color: red">添加分类</h3></td>
